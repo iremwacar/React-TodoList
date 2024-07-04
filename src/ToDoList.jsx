@@ -27,15 +27,18 @@ function ToDoList() {
     if(index>0){
       const updateTasks = [...tasks];
       [updateTasks[index],updateTasks[index-1]] = [updateTasks[index -1],updateTasks[index]];
-      setTasks();
+      setTasks(updateTasks);
     }
   }
 
   function moveTaskDown(index) {
-    if(index>tasks.length-1){
-      const updateTasks = [...tasks];
-      [updateTasks[index -1],updateTasks[index]] = [updateTasks[index],updateTasks[index-1]];
-      setTasks();
+    if (index < tasks.length - 1) {
+      const updatedTasks = [...tasks];
+      [updatedTasks[index], updatedTasks[index + 1]] = [
+        updatedTasks[index + 1],
+        updatedTasks[index],
+      ];
+      setTasks(updatedTasks);
     }
   }
 
@@ -59,14 +62,14 @@ function ToDoList() {
         {tasks.map((task, index) => (
           <li key={index}>
             <span className="text">{task}</span>
-            <button className="delete-button" onClick={() => deleteTask(index)}>
-              <img src={Delete}></img>
+            <button className="delete-button" id="btn" onClick={() => deleteTask(index)}>
+              <img className="delete-img" id="img" src={Delete}></img>
             </button>
-            <button className="up-button" onClick={() => moveTaskUp(index)}>
-              <img src={Up}></img>
+            <button className="up-button" id="btn" onClick={() => moveTaskUp(index)}>
+              <img className="up-img" id="img" src={Up}></img>
             </button>
-            <button className="down-button" onClick={() => moveTaskDown}>
-              <img src={Down}></img>
+            <button className="down-button" id="btn" onClick={() => moveTaskDown(index)}>
+              <img className="down-img" id="img" src={Down}></img>
             </button>
           </li>
         ))}
