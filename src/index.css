@@ -1,3 +1,6 @@
+body{
+    background-image: url('./assets/backgraund.webp') ;
+}
 .to-do-list {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
@@ -36,6 +39,9 @@
     width: 100%; /* Giriş kutusu genişliği */
     max-width: 300px; /* Maksimum genişlik belirleme */
     box-sizing: border-box; /* Kenarlık dahil genişlik hesaplama */
+    max-width: 400px;
+    box-sizing: border-box;
+    height: 100px;
   }
   
   ol {
@@ -84,4 +90,9 @@
     background-size: cover;
   }
   
+  .add-button{
+    margin-left: 20px;
+    height: 100px;
+    width: 200px;
+  }
   
