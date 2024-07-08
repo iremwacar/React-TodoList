@@ -96,3 +96,9 @@ body{
     width: 200px;
   }
   
+  mark {
+    background-color: yellow;
+    color: black;
+    font-weight: bold;
+  }
+  
