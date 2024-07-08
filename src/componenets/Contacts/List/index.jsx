@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Delete from "./assets/icons8-delete-48.png";
-import Up from "./assets/icons8-up-30.png";
-import Down from "./assets/icons8-down-30.png";
+import Delete from "../../../assets/icons8-delete-48.png";
+import Up from "../../../assets/icons8-up-30.png";
+import Down from "../../../assets/icons8-down-30.png";
 
-function ToDoList() {
+function List() {
   const [tasks, setTasks] = useState(["Eat breakfast", "wach tv", "..."]);
   const [newTask, setNewTask] = useState([]);
 
@@ -77,4 +77,4 @@ function ToDoList() {
     </div>
   );
 }
-export default ToDoList;
+export default List;
