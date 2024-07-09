@@ -2,20 +2,20 @@ import { useState } from "react";
 import Delete from "../../../assets/icons8-delete-48.png";
 import Up from "../../../assets/icons8-up-30.png";
 import Down from "../../../assets/icons8-down-30.png";
+import DatePicker from "react-datepicker";
+import Search from "../../../assets/icons8-search-30.png"
+import "react-datepicker/dist/react-datepicker.css";
 
 function List() {
-  const [tasks, setTasks] = useState([
-    { text: "Eat breakfast", datetime: new Date() },
-    { text: "wach tv", datetime: new Date() },
-  ]);
-
-  const [newTask, setNewTask] = useState([]);
+  const [tasks, setTasks] = useState([]);
+  const [newTask, setNewTask] = useState("");
   const [filterText, setFilterText] = useState("");
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedPeriod, setSelectedPeriod] = useState("once");
 
   const filtered = tasks.filter((item) =>
     item.text.toLowerCase().includes(filterText.toLowerCase())
   );
-  console.log("filtered", filtered);
 
   function handleInputChange(event) {
     setNewTask(event.target.value);
@@ -23,7 +23,7 @@ function List() {
 
   function addTask() {
     if (newTask.trim() !== "") {
-      setTasks((t) => [...t, { text: newTask, datetime: new Date() }]);
+      setTasks((t) => [...t, { text: newTask, datetime: selectedDate }]);
       setNewTask("");
     }
   }
@@ -76,7 +76,7 @@ function List() {
 
   return (
     <div className="to-do-list">
-      <h1>To-Do-List</h1>
+      <h1>To-Do List</h1>
 
       <div>
         <input
@@ -85,6 +85,54 @@ function List() {
           value={newTask}
           onChange={handleInputChange}
         />
+        <DatePicker
+          selected={selectedDate}
+          onChange={(date) => setSelectedDate(date)}
+          dateFormat="dd/MM/yyyy"
+          placeholderText="Select date"
+        />
+        <div>
+          <label>
+            <input
+              type="radio"
+              name="period"
+              value="once"
+              checked={selectedPeriod === "once"}
+              onChange={() => setSelectedPeriod("once")}
+            />
+            Once
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="period"
+              value="weekly"
+              checked={selectedPeriod === "weekly"}
+              onChange={() => setSelectedPeriod("weekly")}
+            />
+            Weekly
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="period"
+              value="monthly"
+              checked={selectedPeriod === "monthly"}
+              onChange={() => setSelectedPeriod("monthly")}
+            />
+            Monthly
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="period"
+              value="yearly"
+              checked={selectedPeriod === "yearly"}
+              onChange={() => setSelectedPeriod("yearly")}
+            />
+            Yearly
+          </label>
+        </div>
         <button className="add-button" onClick={addTask}>
           Add
         </button>
@@ -92,8 +140,9 @@ function List() {
       <div>
         <input
           type="text"
-          placeholder="Sorce"
+          placeholder="Search... "
           value={filterText}
+          src={Search}
           onChange={(e) => setFilterText(e.target.value)}
         />
       </div>
@@ -126,4 +175,5 @@ function List() {
     </div>
   );
 }
+
 export default List;

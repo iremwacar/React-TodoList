@@ -2,102 +2,116 @@ body{
     background-image: url('./assets/backgraund.webp') ;
 }
 .to-do-list {
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
-    margin: 100px auto; 
-    max-width: 75%; 
-  }
-  
-  h1 {
-    font-size: 3rem; 
-    margin-bottom: 20px; 
-    color: #ff7b7b; 
-  }
-  
-  .add-button {
-    font-size: 1.6rem; 
-    font-weight: bold;
-    padding: 10px 20px;
-    color: white;
-    background-color: #ffb8b8; 
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease; 
-  }
-  
-  .add-button:hover {
-    background-color: #ff7b7b; 
-  }
-  
-  input[type="text"] {
-    font-size: 1.6rem; 
-    padding: 10px;
-    border: 2px solid #ffb8b8; 
-    border-radius: 5px;
-    color: #2b2b2b; 
-    width: 100%; 
-    max-width: 300px; 
-    box-sizing: border-box; 
-    max-width: 400px;
-    box-sizing: border-box;
-    height: 100px;
-  }
-  
-  ol {
-    padding: 0;
-    list-style-type: none; 
-  }
-  
-  li {
-    font-size: 1.8rem; 
-    font-weight: bold;
-    padding: 15px;
-    background-color: #dfe6e9; 
-    margin-bottom: 10px;
-    border: 2px solid #ffb8b8; 
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-  }
-  
-  .text {
-    flex: 1;
-    margin-right: 10px; 
-  }
-  
-  .delete-button,
-  .up-button,
-  .down-button {
-    background-color: transparent; 
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease; 
-  }
-  
-  .delete-button:hover,
-  .up-button:hover,
-  .down-button:hover {
-    background-color: rgba(0, 0, 0, 0.1); 
-  }
-  
-  .delete-img,
-  .up-img,
-  .down-img {
-    width: 20px;
-    height: 20px;
-    background-position: center;
-    background-size: cover;
-  }
-  
-  .add-button{
-    margin-left: 20px;
-    height: 100px;
-    width: 200px;
-  }
+  font-family: Arial, sans-serif;
+  width: 75%;
+  max-width: 800px;
+  margin: 200px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #f7d7e1; /* Açık pembe tonu */
+}
 
-  .date-time{
-    font-size: x-small;
-    
-  }
-  
+.to-do-list h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.to-do-list > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.to-do-list input[type="text"],
+.to-do-list input[type="radio"] {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.to-do-list .add-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.to-do-list .add-button:hover {
+  background-color: #45a049;
+}
+
+.to-do-list .task-list {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.to-do-list .task-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 5px;
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 4px;
+}
+
+.to-do-list .task-list li .text {
+  flex: 1;
+  padding-right: 10px;
+}
+
+.to-do-list .task-list li .date-time {
+  font-size: 12px;
+  color: #666;
+}
+
+.to-do-list .task-list li .delete-button,
+.to-do-list .task-list li .up-button,
+.to-do-list .task-list li .down-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.to-do-list .task-list li .delete-button:hover,
+.to-do-list .task-list li .up-button:hover,
+.to-do-list .task-list li .down-button:hover {
+  opacity: 0.8;
+}
+
+.to-do-list .task-list li .delete-img,
+.to-do-list .task-list li .up-img,
+.to-do-list .task-list li .down-img {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+
+/* Radio button stillemesi */
+.to-do-list input[type="radio"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #e91e63; /* Pembe tonu */
+  border-radius: 50%; /* Yuvarlak köşeler */
+  outline: none;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.to-do-list input[type="radio"]:checked {
+  background-color: #e91e63; /* Pembe tonu */
+}
