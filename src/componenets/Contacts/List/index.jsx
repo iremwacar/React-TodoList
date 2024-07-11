@@ -3,8 +3,9 @@ import Delete from "../../../assets/icons8-delete-48.png";
 import Up from "../../../assets/icons8-up-30.png";
 import Down from "../../../assets/icons8-down-30.png";
 import DatePicker from "react-datepicker";
-import Search from "../../../assets/icons8-search-30.png"
+import Search from "../../../assets/icons8-search-30.png";
 import "react-datepicker/dist/react-datepicker.css";
+import Dropdown from "react-bootstrap/Dropdown";
 
 function List() {
   const [tasks, setTasks] = useState([]);
@@ -17,13 +18,24 @@ function List() {
     item.text.toLowerCase().includes(filterText.toLowerCase())
   );
 
+  function filterPeriod(period) {
+    if (period === "all") {
+      return tasks;
+    } else {
+      return tasks.filter((task) => task.period === period);
+    }
+  }
+
   function handleInputChange(event) {
     setNewTask(event.target.value);
   }
 
   function addTask() {
     if (newTask.trim() !== "") {
-      setTasks((t) => [...t, { text: newTask, datetime: selectedDate }]);
+      setTasks((t) => [
+        ...t,
+        { text: newTask, datetime: selectedDate, period: selectedPeriod },
+      ]);
       setNewTask("");
     }
   }
@@ -145,6 +157,44 @@ function List() {
           src={Search}
           onChange={(e) => setFilterText(e.target.value)}
         />
+        <Dropdown>
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+            Period
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            <Dropdown.Item
+              className="drp-once"
+              onClick={() => setTasks(filterPeriod("once"))}
+            >
+              Once
+            </Dropdown.Item>
+            <Dropdown.Item
+              className="drp-weekly"
+              onClick={() => setTasks(filterPeriod("weekly"))}
+            >
+              Weekly
+            </Dropdown.Item>
+            <Dropdown.Item
+              className="drp-monthly"
+              onClick={() => setTasks(filterPeriod("monthly"))}
+            >
+              Monthly
+            </Dropdown.Item>
+            <Dropdown.Item
+              className="drp-yearly"
+              onClick={() => setTasks(filterPeriod("yearly"))}
+            >
+              Yearly
+            </Dropdown.Item>
+            <Dropdown.Item
+              className="drp-all"
+              onClick={() => setTasks(filterPeriod("all"))}
+            >
+              All
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
       </div>
 
       <ol className="task-list">
@@ -152,7 +202,9 @@ function List() {
           <li key={index}>
             <span className="text">{renderFilteredText(task.text)}</span>
             <div>
-              <span className="date-time">{task.datetime.toLocaleString()}</span>
+              <span className="date-time">
+                {task.datetime.toLocaleString()}
+              </span>
               <button
                 className="delete-button"
                 onClick={() => deleteTask(index)}
