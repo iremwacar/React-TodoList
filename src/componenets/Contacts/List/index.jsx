@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Delete from "../../../assets/icons8-delete-48.png";
 import Up from "../../../assets/icons8-up-30.png";
 import Down from "../../../assets/icons8-down-30.png";
@@ -7,6 +7,8 @@ import Search from "../../../assets/icons8-search-30.png";
 import "react-datepicker/dist/react-datepicker.css";
 import Dropdown from "react-bootstrap/Dropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function List() {
   const [tasks, setTasks] = useState([]);
@@ -26,6 +28,23 @@ function List() {
       return tasks.filter((task) => task.period === period);
     }
   }
+
+  function nowDate(tasks) {
+    const now = new Date();
+    return tasks.map((task) => ({
+      ...task,
+      passed: task.datetime < now,
+    }));
+  }
+
+  useEffect(()=>{
+    const filteredTasks = nowDate(tasks);
+    if(filteredTasks.length < tasks.length){
+      setTasks(filteredTasks);
+      toast.warn("Some past tasks have been automatically removed.");
+    }
+  },[tasks])
+
 
   function handleInputChange(event) {
     setNewTask(event.target.value);
@@ -200,11 +219,11 @@ function List() {
 
       <ol className="task-list">
         {filtered.map((task, index) => (
-          <li key={index}>
+          <li key={index} className={task.passed ? "task-passed" : ""}>
             <span className="text">{renderFilteredText(task.text)}</span>
             <div>
               <span className="date-time">
-                {task.datetime.toLocaleString()}
+                {task.datetime.toLocaleString()}-{task.period.toLocaleString()}
               </span>
               <button
                 className="delete-button"

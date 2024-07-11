@@ -146,3 +146,7 @@ body{
 .dropdown-item:hover {
   background-color: #dfe6e9;
 }
+.task-passed {
+  opacity: 0.6; /* Opacity ayarı ile sonuk renk */
+  color: #888; /* Opsiyonel olarak yazı rengi değiştirilebilir */
+}
