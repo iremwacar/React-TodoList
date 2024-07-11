@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker";
 import Search from "../../../assets/icons8-search-30.png";
 import "react-datepicker/dist/react-datepicker.css";
 import Dropdown from "react-bootstrap/Dropdown";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function List() {
   const [tasks, setTasks] = useState([]);

@@ -115,3 +115,34 @@ body{
 .to-do-list input[type="radio"]:checked {
   background-color: #e91e63; /* Pembe tonu */
 }
+
+.dropdown-toggle {
+  font-size: 1.6rem;
+  font-weight: bold;
+  padding: 10px 20px;
+  color: white;
+  background-color: #ffb8b8;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-toggle:hover {
+  background-color: #ff7b7b;
+}
+
+.dropdown-menu {
+  font-size: 1.6rem;
+}
+
+.dropdown-item {
+  font-size: 1.6rem;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #dfe6e9;
+}
