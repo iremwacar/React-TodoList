@@ -150,3 +150,33 @@ body{
   opacity: 0.6; /* Opacity ayarı ile sonuk renk */
   color: #888; /* Opsiyonel olarak yazı rengi değiştirilebilir */
 }
+
+/* Checkbox stilini kaldır ve yerine stilize edilmiş tik işareti ekle */
+.to-do-list input[type="checkbox"] {
+  position: absolute; /* Checkbox'u gizlemek için */
+  opacity: 0; /* Checkbox'u gizlemek için */
+}
+
+.to-do-list .custom-checkbox {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc; /* Checkbox kenarlığı */
+  border-radius: 3px; /* Checkbox köşeleri */
+  cursor: pointer;
+}
+
+.to-do-list .custom-checkbox .checkmark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  visibility: hidden; /* Tik işareti başlangıçta görünmez */
+}
+
+.to-do-list .custom-checkbox input[type="checkbox"]:checked + .checkmark {
+  visibility: visible; /* Checkbox seçili olduğunda tik işareti görünür */
+  color: #4caf50; /* Tik işareti rengi */
+  font-size: 16px; /* Tik işareti boyutu */
+}

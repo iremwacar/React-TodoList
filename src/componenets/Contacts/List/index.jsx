@@ -3,15 +3,11 @@ import Delete from "../../../assets/icons8-delete-48.png";
 import Up from "../../../assets/icons8-up-30.png";
 import Down from "../../../assets/icons8-down-30.png";
 import DatePicker from "react-datepicker";
-import Search from "../../../assets/icons8-search-30.png";
 import "react-datepicker/dist/react-datepicker.css";
 import Dropdown from "react-bootstrap/Dropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
-
-import "../../../assets/icons8-search-30.png";
-
-import "react-toastify/dist/ReactToastify.css";
+import "../../../index.css";
 
 function List() {
   const [tasks, setTasks] = useState([]);
@@ -52,12 +48,7 @@ function List() {
     if (newTask.trim() !== "") {
       setTasks((prevTasks) => [
         ...prevTasks,
-        {
-          text: newTask,
-          datetime: selectedDate,
-          period: selectedPeriod,
-          completed: false,
-        },
+        { text: newTask, datetime: selectedDate, period: selectedPeriod, completed: false },
       ]);
       setNewTask("");
     }
@@ -94,7 +85,7 @@ function List() {
     const lowerCaseText = text.toLowerCase();
     const lowerCaseFilterText = filterText.toLowerCase();
     const parts = [];
-
+  
     let lastIndex = 0;
     for (let i = 0; i < lowerCaseFilterText.length; i++) {
       const char = lowerCaseFilterText[i];
@@ -183,7 +174,6 @@ function List() {
           type="text"
           placeholder="Search... "
           value={filterText}
-          src={Search}
           onChange={(e) => setFilterText(e.target.value)}
         />
         <Dropdown>
@@ -192,72 +182,38 @@ function List() {
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            <Dropdown.Item
-              className="drp-once"
-              onClick={() => filterPeriod("once")}
-            >
-              Once
-            </Dropdown.Item>
-            <Dropdown.Item
-              className="drp-weekly"
-              onClick={() => filterPeriod("weekly")}
-            >
-              Weekly
-            </Dropdown.Item>
-            <Dropdown.Item
-              className="drp-monthly"
-              onClick={() => filterPeriod("monthly")}
-            >
-              Monthly
-            </Dropdown.Item>
-            <Dropdown.Item
-              className="drp-yearly"
-              onClick={() => filterPeriod("yearly")}
-            >
-              Yearly
-            </Dropdown.Item>
-            <Dropdown.Item
-              className="drp-all"
-              onClick={() => filterPeriod("all")}
-            >
-              All
-            </Dropdown.Item>
+            <Dropdown.Item onClick={() => filterPeriod("once")}>Once</Dropdown.Item>
+            <Dropdown.Item onClick={() => filterPeriod("weekly")}>Weekly</Dropdown.Item>
+            <Dropdown.Item onClick={() => filterPeriod("monthly")}>Monthly</Dropdown.Item>
+            <Dropdown.Item onClick={() => filterPeriod("yearly")}>Yearly</Dropdown.Item>
+            <Dropdown.Item onClick={() => filterPeriod("all")}>All</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       </div>
 
       <ol className="task-list">
         {filteredTasks.map((task, index) => (
-          <li
-            key={index}
-            className={`${task.passed ? "task-passed" : ""} ${
-              task.completed ? "task-completed" : ""
-            }`}
-          >
-            <input
-              type="checkbox"
-              checked={task.completed}
-              onChange={() => toggleTaskCompleted(index)}
-            />
-
+          <li key={index} className={`${task.passed ? 'task-passed' : ''} ${task.completed ? 'task-completed' : ''}`}>
+            <div className="custom-checkbox" onClick={() => toggleTaskCompleted(index)}>
+              <input
+                type="checkbox"
+                checked={task.completed}
+                readOnly // Read-only olarak işaretlendi
+              />
+              <span className="checkmark">✓</span> {/* Stilize edilmiş tik işareti */}
+            </div>
             <span className="text">{renderFilteredText(task.text)}</span>
             <div>
               <span className="date-time">
-                {task.datetime.toLocaleString()}-{task.period}
+                {task.datetime.toLocaleDateString()} - {task.period}
               </span>
-              <button
-                className="delete-button"
-                onClick={() => deleteTask(index)}
-              >
+              <button className="delete-button" onClick={() => deleteTask(index)}>
                 <img className="delete-img" src={Delete} alt="Delete" />
               </button>
               <button className="up-button" onClick={() => moveTaskUp(index)}>
                 <img className="up-img" src={Up} alt="Move Up" />
               </button>
-              <button
-                className="down-button"
-                onClick={() => moveTaskDown(index)}
-              >
+              <button className="down-button" onClick={() => moveTaskDown(index)}>
                 <img className="down-img" src={Down} alt="Move Down" />
               </button>
             </div>
