@@ -142,7 +142,7 @@ function List() {
               checked={selectedPeriod === "weekly"}
               onChange={() => setSelectedPeriod("weekly")}
             />
-            Weekly
+            Weekly 
           </label>
           <label>
             <input
@@ -152,7 +152,7 @@ function List() {
               checked={selectedPeriod === "monthly"}
               onChange={() => setSelectedPeriod("monthly")}
             />
-            Monthly
+            Monthly 
           </label>
           <label>
             <input
@@ -169,6 +169,7 @@ function List() {
           Add
         </button>
       </div>
+      <hr></hr>
       <div>
         <input
           type="text"
