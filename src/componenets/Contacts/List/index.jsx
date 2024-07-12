@@ -7,7 +7,10 @@ import Search from "../../../assets/icons8-search-30.png";
 import "react-datepicker/dist/react-datepicker.css";
 import Dropdown from "react-bootstrap/Dropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import "../../../assets/icons8-search-30.png";
+
 import "react-toastify/dist/ReactToastify.css";
 
 function List() {
@@ -16,35 +19,30 @@ function List() {
   const [filterText, setFilterText] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedPeriod, setSelectedPeriod] = useState("once");
+  const [filteredTasks, setFilteredTasks] = useState([]);
 
-  const filtered = tasks.filter((item) =>
-    item.text.toLowerCase().includes(filterText.toLowerCase())
-  );
+  useEffect(() => {
+    setFilteredTasks(nowDate(tasks));
+  }, [tasks]);
 
   function filterPeriod(period) {
+    let filteredTasks = [];
     if (period === "all") {
-      return tasks;
+      filteredTasks = tasks;
     } else {
-      return tasks.filter((task) => task.period === period);
+      filteredTasks = tasks.filter((task) => task.period === period);
     }
+    setFilteredTasks(nowDate(filteredTasks));
   }
 
   function nowDate(tasks) {
     const now = new Date();
+    const twentyFourHoursLater = new Date(now.getTime() - 24 * 60 * 60 * 1000);
     return tasks.map((task) => ({
       ...task,
-      passed: task.datetime < now,
+      passed: task.datetime < twentyFourHoursLater,
     }));
   }
-
-  useEffect(()=>{
-    const filteredTasks = nowDate(tasks);
-    if(filteredTasks.length < tasks.length){
-      setTasks(filteredTasks);
-      toast.warn("Some past tasks have been automatically removed.");
-    }
-  },[tasks])
-
 
   function handleInputChange(event) {
     setNewTask(event.target.value);
@@ -52,8 +50,8 @@ function List() {
 
   function addTask() {
     if (newTask.trim() !== "") {
-      setTasks((t) => [
-        ...t,
+      setTasks((prevTasks) => [
+        ...prevTasks,
         { text: newTask, datetime: selectedDate, period: selectedPeriod },
       ]);
       setNewTask("");
@@ -61,18 +59,18 @@ function List() {
   }
 
   function deleteTask(index) {
-    const updateTasks = tasks.filter((_, i) => i !== index);
-    setTasks(updateTasks);
+    const updatedTasks = tasks.filter((_, i) => i !== index);
+    setTasks(updatedTasks);
   }
 
   function moveTaskUp(index) {
     if (index > 0) {
-      const updateTasks = [...tasks];
-      [updateTasks[index], updateTasks[index - 1]] = [
-        updateTasks[index - 1],
-        updateTasks[index],
+      const updatedTasks = [...tasks];
+      [updatedTasks[index], updatedTasks[index - 1]] = [
+        updatedTasks[index - 1],
+        updatedTasks[index],
       ];
-      setTasks(updateTasks);
+      setTasks(updatedTasks);
     }
   }
 
@@ -183,34 +181,19 @@ function List() {
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            <Dropdown.Item
-              className="drp-once"
-              onClick={() => setTasks(filterPeriod("once"))}
-            >
+            <Dropdown.Item className="drp-once" onClick={() => filterPeriod("once")}>
               Once
             </Dropdown.Item>
-            <Dropdown.Item
-              className="drp-weekly"
-              onClick={() => setTasks(filterPeriod("weekly"))}
-            >
+            <Dropdown.Item className="drp-weekly" onClick={() => filterPeriod("weekly")}>
               Weekly
             </Dropdown.Item>
-            <Dropdown.Item
-              className="drp-monthly"
-              onClick={() => setTasks(filterPeriod("monthly"))}
-            >
+            <Dropdown.Item className="drp-monthly" onClick={() => filterPeriod("monthly")}>
               Monthly
             </Dropdown.Item>
-            <Dropdown.Item
-              className="drp-yearly"
-              onClick={() => setTasks(filterPeriod("yearly"))}
-            >
+            <Dropdown.Item className="drp-yearly" onClick={() => filterPeriod("yearly")}>
               Yearly
             </Dropdown.Item>
-            <Dropdown.Item
-              className="drp-all"
-              onClick={() => setTasks(filterPeriod("all"))}
-            >
+            <Dropdown.Item className="drp-all" onClick={() => filterPeriod("all")}>
               All
             </Dropdown.Item>
           </Dropdown.Menu>
@@ -218,26 +201,20 @@ function List() {
       </div>
 
       <ol className="task-list">
-        {filtered.map((task, index) => (
+        {filteredTasks.map((task, index) => (
           <li key={index} className={task.passed ? "task-passed" : ""}>
             <span className="text">{renderFilteredText(task.text)}</span>
             <div>
               <span className="date-time">
-                {task.datetime.toLocaleString()}-{task.period.toLocaleString()}
+                {task.datetime.toLocaleString()}-{task.period}
               </span>
-              <button
-                className="delete-button"
-                onClick={() => deleteTask(index)}
-              >
+              <button className="delete-button" onClick={() => deleteTask(index)}>
                 <img className="delete-img" src={Delete} alt="Delete" />
               </button>
               <button className="up-button" onClick={() => moveTaskUp(index)}>
                 <img className="up-img" src={Up} alt="Move Up" />
               </button>
-              <button
-                className="down-button"
-                onClick={() => moveTaskDown(index)}
-              >
+              <button className="down-button" onClick={() => moveTaskDown(index)}>
                 <img className="down-img" src={Down} alt="Move Down" />
               </button>
             </div>
