@@ -1,20 +1,14 @@
-import { useEffect, useState } from "react";
-import Delete from "../../../assets/icons8-delete-48.png";
-import Up from "../../../assets/icons8-up-30.png";
-import Down from "../../../assets/icons8-down-30.png";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import Dropdown from "react-bootstrap/Dropdown";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "react-toastify/dist/ReactToastify.css";
-import "../../../index.css";
+import TaskInput from "../TaskInput/index";
+import TaskList from "../TaskList/index";
+import TaskFilter from "../TaskFilter/index";
+import { useState,useEffect } from "react";
 
 function List() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
   const [filterText, setFilterText] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selectedPeriod, setSelectedPeriod] = useState("once");
+  const [selectedPeriod, setSelectedPeriod] = useState("");
   const [filteredTasks, setFilteredTasks] = useState([]);
 
   useEffect(() => {
@@ -109,118 +103,29 @@ function List() {
   return (
     <div className="to-do-list">
       <h1>To-Do List</h1>
-
-      <div>
-        <input
-          type="text"
-          placeholder="Enter a task..."
-          value={newTask}
-          onChange={handleInputChange}
-        />
-        <DatePicker
-          selected={selectedDate}
-          onChange={(date) => setSelectedDate(date)}
-          dateFormat="dd/MM/yyyy"
-          placeholderText="Select date"
-        />
-        <div>
-          <label>
-            <input
-              type="radio"
-              name="period"
-              value="once"
-              checked={selectedPeriod === "once"}
-              onChange={() => setSelectedPeriod("once")}
-            />
-            Once
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="period"
-              value="weekly"
-              checked={selectedPeriod === "weekly"}
-              onChange={() => setSelectedPeriod("weekly")}
-            />
-            Weekly 
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="period"
-              value="monthly"
-              checked={selectedPeriod === "monthly"}
-              onChange={() => setSelectedPeriod("monthly")}
-            />
-            Monthly 
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="period"
-              value="yearly"
-              checked={selectedPeriod === "yearly"}
-              onChange={() => setSelectedPeriod("yearly")}
-            />
-            Yearly
-          </label>
-        </div>
-        <button className="add-button" onClick={addTask}>
-          Add
-        </button>
-      </div>
-      <hr></hr>
-      <div>
-        <input
-          type="text"
-          placeholder="Search... "
-          value={filterText}
-          onChange={(e) => setFilterText(e.target.value)}
-        />
-        <Dropdown>
-          <Dropdown.Toggle variant="success" id="dropdown-basic">
-            Period
-          </Dropdown.Toggle>
-
-          <Dropdown.Menu>
-            <Dropdown.Item onClick={() => filterPeriod("once")}>Once</Dropdown.Item>
-            <Dropdown.Item onClick={() => filterPeriod("weekly")}>Weekly</Dropdown.Item>
-            <Dropdown.Item onClick={() => filterPeriod("monthly")}>Monthly</Dropdown.Item>
-            <Dropdown.Item onClick={() => filterPeriod("yearly")}>Yearly</Dropdown.Item>
-            <Dropdown.Item onClick={() => filterPeriod("all")}>All</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-      </div>
-
-      <ol className="task-list">
-        {filteredTasks.map((task, index) => (
-          <li key={index} className={`${task.passed ? 'task-passed' : ''} ${task.completed ? 'task-completed' : ''}`}>
-            <div className="custom-checkbox" onClick={() => toggleTaskCompleted(index)}>
-              <input
-                type="checkbox"
-                checked={task.completed}
-                readOnly // Read-only olarak işaretlendi
-              />
-              <span className="checkmark">✓</span> {/* Stilize edilmiş tik işareti */}
-            </div>
-            <span className="text">{renderFilteredText(task.text)}</span>
-            <div>
-              <span className="date-time">
-                {task.datetime.toLocaleDateString()} - {task.period}
-              </span>
-              <button className="delete-button" onClick={() => deleteTask(index)}>
-                <img className="delete-img" src={Delete} alt="Delete" />
-              </button>
-              <button className="up-button" onClick={() => moveTaskUp(index)}>
-                <img className="up-img" src={Up} alt="Move Up" />
-              </button>
-              <button className="down-button" onClick={() => moveTaskDown(index)}>
-                <img className="down-img" src={Down} alt="Move Down" />
-              </button>
-            </div>
-          </li>
-        ))}
-      </ol>
+      <TaskInput
+        newTask={newTask}
+        selectedDate={selectedDate}
+        selectedPeriod={selectedPeriod}
+        handleInputChange={handleInputChange}
+        setSelectedDate={setSelectedDate}
+        setSelectedPeriod={setSelectedPeriod}
+        addTask={addTask}
+      />
+      <hr />
+      <TaskFilter
+        filterText={filterText}
+        setFilterText={setFilterText}
+        filterPeriod={filterPeriod}
+      />
+      <TaskList
+        tasks={filteredTasks}
+        renderFilteredText={renderFilteredText}
+        toggleTaskCompleted={toggleTaskCompleted}
+        deleteTask={deleteTask}
+        moveTaskUp={moveTaskUp}
+        moveTaskDown={moveTaskDown}
+      />
     </div>
   );
 }
