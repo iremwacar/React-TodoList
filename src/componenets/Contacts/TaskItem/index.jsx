@@ -14,6 +14,7 @@ function TaskItem({ task, index, renderFilteredText, toggleTaskCompleted, delete
         />
         <span className="checkmark">✓</span>
       </div>
+      <span className="text-title">{task.taskTitle}--</span>
       <span className="text">{renderFilteredText(task.text)}</span>
       <div>
         <span className="date-time">
@@ -40,6 +41,7 @@ TaskItem.propTypes = {
       period: PropTypes.string.isRequired,
       completed: PropTypes.bool.isRequired,
       passed: PropTypes.bool,
+      taskTitle: PropTypes.string.isRequired
     }).isRequired,
     index: PropTypes.number.isRequired,
     renderFilteredText: PropTypes.func.isRequired,

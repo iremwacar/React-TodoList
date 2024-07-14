@@ -7,18 +7,25 @@ function TaskInput({
   selectedDate,
   selectedPeriod,
   handleInputChange,
+  title,
+  handleInputTitle,
   setSelectedDate,
   setSelectedPeriod,
   addTask,
 }) {
   return (
     <div>
+        <input type="text"
+        placeholder="Enter a title..." 
+        value={title}
+        onChange={handleInputTitle}/>
       <input
         type="text"
         placeholder="Enter a task..."
         value={newTask}
         onChange={handleInputChange}
       />
+      
       <DatePicker
         selected={selectedDate}
         onChange={(date) => setSelectedDate(date)}
@@ -75,9 +82,12 @@ function TaskInput({
 }
 TaskInput.propTypes = {
     newTask: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
     selectedDate: PropTypes.instanceOf(Date).isRequired,
     selectedPeriod: PropTypes.string.isRequired,
     handleInputChange: PropTypes.func.isRequired,
+    handleInputTitle: PropTypes.func.isRequired,
+    setTitle: PropTypes.func.isRequired,
     setSelectedDate: PropTypes.func.isRequired,
     setSelectedPeriod: PropTypes.func.isRequired,
     addTask: PropTypes.func.isRequired,

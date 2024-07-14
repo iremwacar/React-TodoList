@@ -7,6 +7,7 @@ function List() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
   const [filterText, setFilterText] = useState("");
+  const [title,setTitle]= useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedPeriod, setSelectedPeriod] = useState("");
   const [filteredTasks, setFilteredTasks] = useState([]);
@@ -38,13 +39,18 @@ function List() {
     setNewTask(event.target.value);
   }
 
+  function handleInputTitle(event){
+    setTitle(event.target.value);
+  }
+
   function addTask() {
     if (newTask.trim() !== "") {
       setTasks((prevTasks) => [
         ...prevTasks,
-        { text: newTask, datetime: selectedDate, period: selectedPeriod, completed: false },
+        { taskTitle:title, text: newTask, datetime: selectedDate, period: selectedPeriod, completed: false },
       ]);
       setNewTask("");
+      setTitle("");
     }
   }
 
@@ -105,9 +111,12 @@ function List() {
       <h1>To-Do List</h1>
       <TaskInput
         newTask={newTask}
+        title={title}
         selectedDate={selectedDate}
         selectedPeriod={selectedPeriod}
         handleInputChange={handleInputChange}
+        handleInputTitle={handleInputTitle}
+        setTitle={setTitle}
         setSelectedDate={setSelectedDate}
         setSelectedPeriod={setSelectedPeriod}
         addTask={addTask}
