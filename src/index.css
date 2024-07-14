@@ -190,4 +190,26 @@ body {
   color: #888; /* Opsiyonel olarak yazı rengini değiştirebilirsiniz */
 }
 
+.task-details {
+  display: none;
+  list-style-type: none;
+  padding: 0;
+  margin-top: 20px;
+}
 
+.task-item:hover .task-details {
+  display: block;
+}
+
+
+.task-details span {
+  font-style: italic;
+  font-weight: 15px;
+  color: #4747475b;
+  text-align: left;
+  left: 10px;
+}
+
+.task-details-text{
+  left: 0;
+}
