@@ -25,10 +25,11 @@ function TaskInput({
           placeholder="Enter a title..."
           onChange={handleInputTitle}
         />
-        {touched.title && errors.title ? <div>{errors.title}</div> : null}
       </div>
+      {touched.title && errors.title ? <div className="error-message">{errors.title}</div> : null}
+
       <div>
-        <input
+        <textarea
           type="text"
           name="newTask"
           value={newTask}
@@ -36,8 +37,9 @@ function TaskInput({
           placeholder="Enter a task..."
           onChange={handleInputChange}
         />
-        {touched.newTask && errors.newTask ? <div>{errors.newTask}</div> : null}
       </div>
+      {touched.newTask && errors.newTask ? <div className="error-message">{errors.newTask}</div> : null}
+
       <div>
         <input
           type="date"
@@ -46,7 +48,9 @@ function TaskInput({
           value={selectedDate.toISOString().split("T")[0]}
           onChange={(e) => setSelectedDate("selectedDate", new Date(e.target.value))}
         />
-        {touched.selectedDate && errors.selectedDate ? <div>{errors.selectedDate}</div> : null}
+      
+      {touched.selectedDate && errors.selectedDate ? <div className="error-message">{errors.selectedDate}</div> : null}
+
       
         <select
           name="selectedPeriod"
@@ -55,12 +59,13 @@ function TaskInput({
           onChange={(e) => setSelectedPeriod("selectedPeriod", e.target.value)}
         >
           <option value="" label="Select period" />
-          <option value="morning" label="Morning" />
-          <option value="afternoon" label="Afternoon" />
-          <option value="evening" label="Evening" />
+          <option value="weekly" label="Weekly" />
+          <option value="monthly" label="Monthly" />
+          <option value="yearly" label="Yearly" />
         </select>
-        {touched.selectedPeriod && errors.selectedPeriod ? <div>{errors.selectedPeriod}</div> : null}
       </div>
+      {touched.selectedPeriod && errors.selectedPeriod ? <div className="error-message">{errors.selectedPeriod}</div> : null}
+
       <button className="add-button" type="submit" onClick={addTask}>Add</button>
     </div>
   );

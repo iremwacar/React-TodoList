@@ -1,16 +1,18 @@
 .task-passed {
-    text-decoration: line-through;
+    
     color: gray;
   }
   
   .task-completed {
     background-color: #e0ffe0;
+    text-decoration: line-through;
   }
   
   .task-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 10px;
   }
   
   .custom-checkbox {
@@ -28,13 +30,13 @@
     display: none;
     flex-direction: column;
     gap: 5px;
+    align-items: flex-start;
+    margin-top: 5px;
   }
   
   .task-item:hover .task-details {
     display: flex;
   }
-
-  
   
   .text-title {
     font-weight: bold;
@@ -57,8 +59,20 @@
     width: 20px;
     height: 20px;
   }
-
-  .task-details-text{
-    left: auto;
+  
+  .task-details-text {
+    font-size: 0.9em;
+    color: gray;
   }
   
+  .task-details-date {
+    font-size: 0.9em;
+    color: gray;
+  }
+  
+  .custom-checkbox {
+    display: inline-block;
+    cursor: pointer;
+    margin-right: 10px; /* Kutucuk ve başlık arasındaki boşluk */
+    position: absolute;
+  }

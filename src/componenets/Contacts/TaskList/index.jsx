@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Delete from "../../../assets/icons8-delete-48.png";
 import Up from "../../../assets/icons8-up-30.png";
 import Down from "../../../assets/icons8-down-30.png";
-import "./index.css"
+import "./index.css";
 
 function TaskList({
   tasks,
@@ -22,22 +22,26 @@ function TaskList({
             task.completed ? "task-completed" : ""
           }`}
         >
-          <div
-            className="custom-checkbox"
-            onClick={() => toggleTaskCompleted(index)}
-          >
-            <input type="checkbox" checked={task.completed} readOnly />
-            <span className="checkmark">✓</span>
+          <div className="task-content">
+            <div
+              className="custom-checkbox"
+              onClick={() => toggleTaskCompleted(index)}
+            >
+              <input type="checkbox" checked={task.completed} readOnly />
+              <span className="checkmark">✓</span>
+            </div>
+            <span className="text-title">{renderFilteredText(task.taskTitle)}</span>
           </div>
-          <span className="text">{renderFilteredText(task.taskTitle)}</span>
+          
           <div className="task-details">
             <span className="task-details-text">{task.text}</span>
             <span className="task-details-date">
-              Date: {task.datetime.toLocaleDateString()}
-              Period: {task.period}
-            </span>
+              Date: {task.datetime.toLocaleDateString()}    </span>  
+              <span className="task-details-date"> Period: {task.period}</span> 
+            
           </div>
-          <div>
+          
+          <div className="task-actions">
             <button className="delete-button" onClick={() => deleteTask(index)}>
               <img className="delete-img" src={Delete} alt="Delete" />
             </button>

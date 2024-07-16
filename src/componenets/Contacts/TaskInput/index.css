@@ -58,6 +58,7 @@
   margin-left: 10px;
   text-align: center; 
   margin-top: 20px;
+  
 }
 
 .add-button:hover {
@@ -70,3 +71,9 @@
   height: 100px;
  
 }
+
+.error-message {
+  font-size: 14px;
+  margin-top: 20px;
+} 
+

@@ -16,7 +16,6 @@ function TaskFilter({ filterText, setFilterText, filterPeriod }) {
           Period
         </Dropdown.Toggle>
         <Dropdown.Menu>
-          <Dropdown.Item onClick={() => filterPeriod("once")}>Once</Dropdown.Item>
           <Dropdown.Item onClick={() => filterPeriod("weekly")}>Weekly</Dropdown.Item>
           <Dropdown.Item onClick={() => filterPeriod("monthly")}>Monthly</Dropdown.Item>
           <Dropdown.Item onClick={() => filterPeriod("yearly")}>Yearly</Dropdown.Item>
