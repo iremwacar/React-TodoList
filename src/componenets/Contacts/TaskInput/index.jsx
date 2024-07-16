@@ -1,85 +1,67 @@
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import PropTypes from "prop-types";
-import "./index.css"; // Stil dosyası
+import PropTypes from 'prop-types';
+import './index.css';
 
 function TaskInput({
   newTask,
+  title,
   selectedDate,
   selectedPeriod,
   handleInputChange,
-  title,
   handleInputTitle,
   setSelectedDate,
   setSelectedPeriod,
   addTask,
+  errors,
+  touched,
 }) {
   return (
-    <div className="task-input-container">
-      <input
-        type="text"
-        className="title-input"
-        placeholder="Enter a title..."
-        value={title}
-        onChange={handleInputTitle}
-      />
-      <textarea
-        className="task-input"
-        placeholder="Enter a task..."
-        value={newTask}
-        onChange={handleInputChange}
-      />
-      <DatePicker
-        selected={selectedDate}
-        onChange={(date) => setSelectedDate(date)}
-        dateFormat="dd/MM/yyyy"
-        placeholderText="Select date"
-      />
-      <div>
-        <label>
-          <input
-            type="radio"
-            name="period"
-            value="once"
-            checked={selectedPeriod === "once"}
-            onChange={() => setSelectedPeriod("once")}
-          />
-          Once
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="period"
-            value="weekly"
-            checked={selectedPeriod === "weekly"}
-            onChange={() => setSelectedPeriod("weekly")}
-          />
-          Weekly
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="period"
-            value="monthly"
-            checked={selectedPeriod === "monthly"}
-            onChange={() => setSelectedPeriod("monthly")}
-          />
-          Monthly
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="period"
-            value="yearly"
-            checked={selectedPeriod === "yearly"}
-            onChange={() => setSelectedPeriod("yearly")}
-          />
-          Yearly
-        </label>
+    <div>
+      <div className="task-input-container">
+        <input
+          type="text"
+          name="title"
+          value={title}
+          className="task-title-input"
+          placeholder="Enter a title..."
+          onChange={handleInputTitle}
+        />
+        {touched.title && errors.title ? <div>{errors.title}</div> : null}
       </div>
-      <button className="add-button" onClick={addTask}>
-        Add
-      </button>
+      <div>
+        <input
+          type="text"
+          name="newTask"
+          value={newTask}
+          className="task-input"
+          placeholder="Enter a task..."
+          onChange={handleInputChange}
+        />
+        {touched.newTask && errors.newTask ? <div>{errors.newTask}</div> : null}
+      </div>
+      <div>
+        <input
+          type="date"
+          name="selectedDate"
+          className="task-date-input"
+          value={selectedDate.toISOString().split("T")[0]}
+          onChange={(e) => setSelectedDate("selectedDate", new Date(e.target.value))}
+        />
+        {touched.selectedDate && errors.selectedDate ? <div>{errors.selectedDate}</div> : null}
+      
+        <select
+          name="selectedPeriod"
+          value={selectedPeriod}
+          className="task-period-input"
+          onChange={(e) => setSelectedPeriod("selectedPeriod", e.target.value)}
+        >
+          <option value="" label="Select period" />
+          <option value="morning" label="Morning" />
+          <option value="afternoon" label="Afternoon" />
+          <option value="evening" label="Evening" />
+        </select>
+        {touched.selectedPeriod && errors.selectedPeriod ? <div>{errors.selectedPeriod}</div> : null}
+      </div>
+      <button className="add-button" type="submit" onClick={addTask}>Add</button>
     </div>
   );
 }
@@ -94,6 +76,8 @@ TaskInput.propTypes = {
   setSelectedDate: PropTypes.func.isRequired,
   setSelectedPeriod: PropTypes.func.isRequired,
   addTask: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
+  touched: PropTypes.object.isRequired,
 };
 
 export default TaskInput;

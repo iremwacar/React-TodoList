@@ -2,17 +2,14 @@ import TaskInput from "../TaskInput/index";
 import TaskList from "../TaskList/index";
 import TaskFilter from "../TaskFilter/index";
 import { useState, useEffect } from "react";
-import alertify from "alertifyjs"; 
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import 'alertifyjs/build/css/alertify.css';
 import 'alertifyjs/build/css/themes/default.css';
 
 function List() {
   const [tasks, setTasks] = useState([]);
-  const [newTask, setNewTask] = useState("");
   const [filterText, setFilterText] = useState("");
-  const [title, setTitle] = useState("");
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selectedPeriod, setSelectedPeriod] = useState("");
   const [filteredTasks, setFilteredTasks] = useState([]);
 
   useEffect(() => {
@@ -38,40 +35,40 @@ function List() {
     }));
   }
 
-  function handleInputChange(event) {
-    setNewTask(event.target.value);
-  }
-
-  function handleInputTitle(event) {
-    setTitle(event.target.value);
-  }
-
-  function addTask() {
-    const maxTaskLength = 300;
-    const maxTitleLength = 30;
-
-    if (newTask.trim().length > maxTaskLength) {
-      alertify.error("The text you entered is too long. Please enter a maximum of 300 characters long.");
-      return;
-    }
-
-    if (title.trim().length > maxTitleLength) {
-      alertify.error("The title you entered is too long. Please enter a maximum of 30 characters long.");
-      return;
-    }
-
-    if (newTask.trim() === "") {
-      alertify.error("Please enter a task.");
-      return;
-    }
-
-    setTasks((prevTasks) => [
-      ...prevTasks,
-      { taskTitle: title, text: newTask, datetime: selectedDate, period: selectedPeriod, completed: false },
-    ]);
-    setNewTask("");
-    setTitle("");
-  }
+  const formik = useFormik({
+    //initialValues: Form ilk yüklendiğinde hangi değerlerin alınacağını belirler.
+    initialValues: {
+      title: "",
+      newTask: "",
+      selectedDate: new Date(),
+      selectedPeriod: "",
+    },
+    //validationSchema: Form doğrulama şeması
+    validationSchema: Yup.object({
+      title: Yup.string()
+        .max(30, "The title you entered is too long. Please enter a maximum of 30 characters long.")
+        .required("Please enter a title."),
+      newTask: Yup.string()
+        .max(300, "The text you entered is too long. Please enter a maximum of 300 characters long.")
+        .required("Please enter a task."),
+      selectedDate: Yup.date().required("Please select a date."),
+      selectedPeriod: Yup.string().required("Please select a period."),
+    }),
+    //onSubmit: Form gönderildiğinde ne olacak
+    onSubmit: (values, { resetForm }) => {
+      setTasks((prevTasks) => [
+        ...prevTasks,
+        {
+          taskTitle: values.title,
+          text: values.newTask,
+          datetime: values.selectedDate,
+          period: values.selectedPeriod,
+          completed: false,
+        },
+      ]);
+      resetForm();
+    },
+  });
 
   function deleteTask(index) {
     const updatedTasks = tasks.filter((_, i) => i !== index);
@@ -128,18 +125,22 @@ function List() {
   return (
     <div className="to-do-list">
       <h1>To-Do List</h1>
-      <TaskInput
-        newTask={newTask}
-        title={title}
-        selectedDate={selectedDate}
-        selectedPeriod={selectedPeriod}
-        handleInputChange={handleInputChange}
-        handleInputTitle={handleInputTitle}
-        setTitle={setTitle}
-        setSelectedDate={setSelectedDate}
-        setSelectedPeriod={setSelectedPeriod}
-        addTask={addTask}
-      />
+      <form onSubmit={formik.handleSubmit}>
+        <TaskInput
+          newTask={formik.values.newTask}
+          title={formik.values.title}
+          selectedDate={formik.values.selectedDate}
+          selectedPeriod={formik.values.selectedPeriod}
+          handleInputChange={formik.handleChange}
+          handleInputTitle={formik.handleChange}
+          setTitle={formik.setFieldValue}
+          setSelectedDate={formik.setFieldValue}
+          setSelectedPeriod={formik.setFieldValue}
+          addTask={formik.handleSubmit}
+          errors={formik.errors}
+          touched={formik.touched}
+        />
+      </form>
       <hr />
       <TaskFilter
         filterText={filterText}

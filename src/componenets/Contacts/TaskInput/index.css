@@ -1,20 +1,72 @@
 .task-input-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .title-input {
-    width: 200px;
-  }
-  
-  .task-input {
-    width: 400px; /* Büyük boyut */
-    height: 100px; /* Yüksekliği arttırıldı */
-  }
-  
-  .add-button {
-    margin-top: 10px;
-    width: 200px;
-  }
-  
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px; /* Yüksekliği artırdık */
+}
+
+.task-title-input,
+.task-input,
+.task-date-input,
+.task-period-input {
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px; /* Kenar yarıçapını artırdık */
+  margin-left: 10px;
+  width: calc(50% - 20px); /* Sol ve sağ marginler hariç genişlik */
+  transition: border-color 0.3s ease; /* Sınır rengi geçiş efekti */
+}
+
+.task-title-input:focus,
+.task-input:focus,
+.task-date-input:focus,
+.task-period-input:focus {
+  outline: none;
+  border-color: #e91e63; /* Odaklandığında sınır rengi */
+}
+
+.task-date-input {
+  padding: 12px; /* Yüksekliği artırdık */
+  width: calc(50% - 20px); /* Sol ve sağ marginler hariç genişlik */
+}
+
+.task-period-input {
+  background-color: #f0f0f0; /* Arka plan rengi */
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  margin-left: 10px;
+  width: calc(50% - 20px); /* Sol ve sağ marginler hariç genişlik */
+  margin-top: 10px;
+}
+
+.task-period-input label {
+  margin-right: 15px; /* Etiketler arasındaki boşluk */
+}
+
+.add-button {
+  padding: 14px 24px; /* Yükseklik ve genişliği artırdık */
+  font-size: 18px; /* Yazı boyutunu büyüttük */
+  background-color: #e91e63; /* Pembe tonu */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Kutu gölgesi */
+  margin-top: 20px; /* Buton ile diğer içerik arasındaki boşluğu artırdık */
+  margin-left: 10px;
+  text-align: center; 
+  margin-top: 20px;
+}
+
+.add-button:hover {
+  background-color: #c2185b; /* Koyu pembe tonu */
+  transform: scale(1.05);
+}
+
+.task-input{
+  width: 98%;
+  height: 100px;
+ 
+}

@@ -36,24 +36,6 @@ body {
   border-radius: 4px;
 }
 
-.to-do-list .add-button {
-  padding: 15px 30px;
-  font-size: 18px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.to-do-list .add-button:hover {
-  background-color: #45a049;
-  transform: scale(1.05);
-}
-
-
 .to-do-list .task-list {
   list-style-type: none;
   padding: 0;
@@ -70,16 +52,6 @@ body {
   border: 1px solid #eee;
   border-radius: 4px;
   position: relative; /* Görev silme, yukarı ve aşağı butonlarını hizalamak için */
-}
-
-.to-do-list .task-list li .text {
-  flex: 1;
-  padding-right: 10px;
-}
-
-.to-do-list .task-list li .date-time {
-  font-size: 12px;
-  color: #666;
 }
 
 .to-do-list .task-list li .delete-button,
@@ -104,24 +76,6 @@ body {
   width: 20px;
   height: 20px;
   vertical-align: middle;
-}
-
-/* Radio button stillemesi */
-.to-do-list input[type="radio"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #e91e63; /* Pembe tonu */
-  border-radius: 50%; /* Yuvarlak köşeler */
-  outline: none;
-  cursor: pointer;
-  margin-right: 5px;
-}
-
-.to-do-list input[type="radio"]:checked {
-  background-color: #e91e63; /* Pembe tonu */
 }
 
 .dropdown-toggle {
@@ -189,4 +143,3 @@ body {
   opacity: 0.6; /* Görev tamamlandığında soluk yeşil yapmak için */
   color: #888; /* Opsiyonel olarak yazı rengini değiştirebilirsiniz */
 }
-
