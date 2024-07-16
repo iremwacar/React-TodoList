@@ -44,15 +44,32 @@ function List() {
   }
 
   function addTask() {
-    if (newTask.trim() !== "") {
-      setTasks((prevTasks) => [
-        ...prevTasks,
-        { taskTitle:title, text: newTask, datetime: selectedDate, period: selectedPeriod, completed: false },
-      ]);
-      setNewTask("");
-      setTitle("");
+    const maxTaskLength = 300;
+    const maxTitleLength = 30;
+  
+    if (newTask.trim().length > maxTaskLength) {
+      alert("The text you entered is too long. Please enter a maximum of 300 characters long.");
+      return; 
     }
+  
+    if (title.trim().length > maxTitleLength) {
+      alert("The title you entered is too long. Please enter a maximum of 30 characters long.");
+      return; 
+    }
+  
+    if (newTask.trim() === "") {
+      alert("Please enter a task.");
+      return; 
+    }
+  
+    setTasks((prevTasks) => [
+      ...prevTasks,
+      { taskTitle: title, text: newTask, datetime: selectedDate, period: selectedPeriod, completed: false },
+    ]);
+    setNewTask("");
+    setTitle("");
   }
+  
 
   function deleteTask(index) {
     const updatedTasks = tasks.filter((_, i) => i !== index);
