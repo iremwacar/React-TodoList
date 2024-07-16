@@ -1,13 +1,16 @@
 import TaskInput from "../TaskInput/index";
 import TaskList from "../TaskList/index";
 import TaskFilter from "../TaskFilter/index";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
+import alertify from "alertifyjs"; 
+import 'alertifyjs/build/css/alertify.css';
+import 'alertifyjs/build/css/themes/default.css';
 
 function List() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
   const [filterText, setFilterText] = useState("");
-  const [title,setTitle]= useState("");
+  const [title, setTitle] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedPeriod, setSelectedPeriod] = useState("");
   const [filteredTasks, setFilteredTasks] = useState([]);
@@ -39,29 +42,29 @@ function List() {
     setNewTask(event.target.value);
   }
 
-  function handleInputTitle(event){
+  function handleInputTitle(event) {
     setTitle(event.target.value);
   }
 
   function addTask() {
     const maxTaskLength = 300;
     const maxTitleLength = 30;
-  
+
     if (newTask.trim().length > maxTaskLength) {
-      alert("The text you entered is too long. Please enter a maximum of 300 characters long.");
-      return; 
+      alertify.error("The text you entered is too long. Please enter a maximum of 300 characters long.");
+      return;
     }
-  
+
     if (title.trim().length > maxTitleLength) {
-      alert("The title you entered is too long. Please enter a maximum of 30 characters long.");
-      return; 
+      alertify.error("The title you entered is too long. Please enter a maximum of 30 characters long.");
+      return;
     }
-  
+
     if (newTask.trim() === "") {
-      alert("Please enter a task.");
-      return; 
+      alertify.error("Please enter a task.");
+      return;
     }
-  
+
     setTasks((prevTasks) => [
       ...prevTasks,
       { taskTitle: title, text: newTask, datetime: selectedDate, period: selectedPeriod, completed: false },
@@ -69,7 +72,6 @@ function List() {
     setNewTask("");
     setTitle("");
   }
-  
 
   function deleteTask(index) {
     const updatedTasks = tasks.filter((_, i) => i !== index);
@@ -102,7 +104,7 @@ function List() {
     const lowerCaseText = text.toLowerCase();
     const lowerCaseFilterText = filterText.toLowerCase();
     const parts = [];
-  
+
     let lastIndex = 0;
     for (let i = 0; i < lowerCaseFilterText.length; i++) {
       const char = lowerCaseFilterText[i];
