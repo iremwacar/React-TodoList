@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Delete from "../../../assets/icons8-delete-48.png";
 import Up from "../../../assets/icons8-up-30.png";
 import Down from "../../../assets/icons8-down-30.png";
+import "./index.css"
 
 function TaskList({
   tasks,

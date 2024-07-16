@@ -1,6 +1,7 @@
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import PropTypes from "prop-types";
+import "./index.css"; // Stil dosyası
 
 function TaskInput({
   newTask,
@@ -14,18 +15,20 @@ function TaskInput({
   addTask,
 }) {
   return (
-    <div>
-        <input type="text"
-        placeholder="Enter a title..." 
-        value={title}
-        onChange={handleInputTitle}/>
+    <div className="task-input-container">
       <input
         type="text"
+        className="title-input"
+        placeholder="Enter a title..."
+        value={title}
+        onChange={handleInputTitle}
+      />
+      <textarea
+        className="task-input"
         placeholder="Enter a task..."
         value={newTask}
         onChange={handleInputChange}
       />
-      
       <DatePicker
         selected={selectedDate}
         onChange={(date) => setSelectedDate(date)}
@@ -80,17 +83,17 @@ function TaskInput({
     </div>
   );
 }
+
 TaskInput.propTypes = {
-    newTask: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    selectedDate: PropTypes.instanceOf(Date).isRequired,
-    selectedPeriod: PropTypes.string.isRequired,
-    handleInputChange: PropTypes.func.isRequired,
-    handleInputTitle: PropTypes.func.isRequired,
-    setTitle: PropTypes.func.isRequired,
-    setSelectedDate: PropTypes.func.isRequired,
-    setSelectedPeriod: PropTypes.func.isRequired,
-    addTask: PropTypes.func.isRequired,
-  };
+  newTask: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  selectedDate: PropTypes.instanceOf(Date).isRequired,
+  selectedPeriod: PropTypes.string.isRequired,
+  handleInputChange: PropTypes.func.isRequired,
+  handleInputTitle: PropTypes.func.isRequired,
+  setSelectedDate: PropTypes.func.isRequired,
+  setSelectedPeriod: PropTypes.func.isRequired,
+  addTask: PropTypes.func.isRequired,
+};
 
 export default TaskInput;

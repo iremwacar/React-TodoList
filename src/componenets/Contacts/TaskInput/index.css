@@ -1,0 +1,20 @@
+.task-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .title-input {
+    width: 200px;
+  }
+  
+  .task-input {
+    width: 400px; /* Büyük boyut */
+    height: 100px; /* Yüksekliği arttırıldı */
+  }
+  
+  .add-button {
+    margin-top: 10px;
+    width: 200px;
+  }
+  

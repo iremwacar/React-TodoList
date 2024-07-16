@@ -1,0 +1,64 @@
+.task-passed {
+    text-decoration: line-through;
+    color: gray;
+  }
+  
+  .task-completed {
+    background-color: #e0ffe0;
+  }
+  
+  .task-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .custom-checkbox {
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .task-details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .task-details {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .task-item:hover .task-details {
+    display: flex;
+  }
+
+  
+  
+  .text-title {
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .date-time {
+    font-size: 0.9em;
+    color: gray;
+  }
+  
+  .task-actions {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .delete-img,
+  .up-img,
+  .down-img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .task-details-text{
+    left: auto;
+  }
+  
