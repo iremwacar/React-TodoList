@@ -20,6 +20,13 @@ function TaskFilter({ filterText, setFilterText, filterPeriod, filterDate }) {
         value={filterText}
         onChange={(e) => setFilterText(e.target.value)}
       />
+      <DatePicker
+          className="dateFilter"
+          selected={selectedDate}
+          onChange={handleDateChange}
+          dateFormat="dd/MM/yyyy"
+          placeholderText="Select a date"
+        />
       <Dropdown>
         <Dropdown.Toggle variant="success" id="dropdown-basic">
           Period
@@ -30,14 +37,7 @@ function TaskFilter({ filterText, setFilterText, filterPeriod, filterDate }) {
           <Dropdown.Item onClick={() => filterPeriod("all")}>All</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
-      <label htmlFor="dateFilter">Date:</label>
-        <DatePicker
-          id="dateFilter"
-          selected={selectedDate}
-          onChange={handleDateChange}
-          dateFormat="dd/MM/yyyy"
-          placeholderText="Select a date"
-        />
+        
       
     </div>
   );

@@ -16,6 +16,18 @@ function List() {
     setFilteredTasks(nowDate(tasks));
   }, [tasks]);
 
+  useEffect(() => {
+    // sadece filtrelenen değerleri gösterir.
+    if (filterText.trim() === "") {
+      setFilteredTasks(nowDate(tasks)); 
+    } else {
+      const filtered = tasks.filter(task =>
+        task.taskTitle.toLowerCase().includes(filterText.toLowerCase())
+      );
+      setFilteredTasks(nowDate(filtered)); 
+    }
+  }, [filterText, tasks]);
+
   function filterPeriod(period) {
     let filteredTasks = [];
     if (period === "all") {

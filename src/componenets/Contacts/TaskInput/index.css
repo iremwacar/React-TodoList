@@ -31,12 +31,12 @@
 }
 
 .task-period-input {
-  background-color: #f0f0f0; /* Arka plan rengi */
+  background-color: white; /* Arka plan rengi */
   padding: 12px;
   border: none;
   border-radius: 6px;
   margin-left: 10px;
-  width: calc(50% - 20px); /* Sol ve sağ marginler hariç genişlik */
+  width: calc(50% - 5px); /* Sol ve sağ marginler hariç genişlik */
   margin-top: 10px;
 }
 
