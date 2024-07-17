@@ -6,6 +6,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import 'alertifyjs/build/css/alertify.css';
 import 'alertifyjs/build/css/themes/default.css';
+import alertify from "alertifyjs";
 
 function List() {
   const [tasks, setTasks] = useState([]);
@@ -86,15 +87,15 @@ function List() {
     //onSubmit: Form gönderildiğinde ne olacak
     onSubmit: (values, { resetForm }) => {
       setTasks((prevTasks) => [
-        ...prevTasks,
+        
         {
           taskTitle: values.title,
           text: values.newTask,
           datetime: values.selectedDate,
           period: values.selectedPeriod,
           completed: false,
-        },
-      ]);
+        },...prevTasks,
+      ],alertify.success(values.title + " added to list."));
       resetForm();
     },
   });
