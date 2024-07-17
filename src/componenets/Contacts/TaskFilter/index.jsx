@@ -1,8 +1,17 @@
 import Dropdown from "react-bootstrap/Dropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
 import PropTypes from "prop-types";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import  { useState } from 'react';
 
-function TaskFilter({ filterText, setFilterText, filterPeriod }) {
+function TaskFilter({ filterText, setFilterText, filterPeriod, filterDate }) {
+  const [selectedDate, setSelectedDate] = useState(null);
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+    filterDate(date);
+  };
   return (
     <div>
       <input
@@ -21,6 +30,15 @@ function TaskFilter({ filterText, setFilterText, filterPeriod }) {
           <Dropdown.Item onClick={() => filterPeriod("all")}>All</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
+      <label htmlFor="dateFilter">Date:</label>
+        <DatePicker
+          id="dateFilter"
+          selected={selectedDate}
+          onChange={handleDateChange}
+          dateFormat="dd/MM/yyyy"
+          placeholderText="Select a date"
+        />
+      
     </div>
   );
 }
@@ -28,6 +46,7 @@ TaskFilter.propTypes = {
     filterText: PropTypes.string.isRequired,
     setFilterText: PropTypes.func.isRequired,
     filterPeriod: PropTypes.func.isRequired,
+    filterDate: PropTypes.func.isRequired,
   };
 
 export default TaskFilter;

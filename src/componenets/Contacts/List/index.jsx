@@ -26,6 +26,23 @@ function List() {
     setFilteredTasks(nowDate(filteredTasks));
   }
 
+  function filterDate(selectedDate) {
+    let filteredDates = [];
+    if (!selectedDate) {
+      filteredDates = tasks;
+    } else {
+      filteredDates = tasks.filter((task) => {
+        // Tarihi karşılaştırırken sadece gün, ay ve yıl bazında karşılaştırma yapmalıyız
+        const taskDate = new Date(task.datetime);
+        return (
+          taskDate.getDate() === selectedDate.getDate() &&
+          taskDate.getMonth() === selectedDate.getMonth() &&
+          taskDate.getFullYear() === selectedDate.getFullYear()
+        );
+      });
+    }
+    setFilteredTasks(nowDate(filteredDates));
+  }
   function nowDate(tasks) {
     const now = new Date();
     const twentyFourHoursLater = new Date(now.getTime() - 24 * 60 * 60 * 1000);
@@ -146,6 +163,7 @@ function List() {
         filterText={filterText}
         setFilterText={setFilterText}
         filterPeriod={filterPeriod}
+        filterDate={filterDate}
       />
       <TaskList
         tasks={filteredTasks}
