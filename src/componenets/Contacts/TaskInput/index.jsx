@@ -59,6 +59,7 @@ function TaskInput({
           onChange={(e) => setSelectedPeriod("selectedPeriod", e.target.value)}
         >
           <option value="" label="Select period" />
+          <option value="daily" label="Daily"/>
           <option value="weekly" label="Weekly" />
           <option value="monthly" label="Monthly" />
           <option value="yearly" label="Yearly" />

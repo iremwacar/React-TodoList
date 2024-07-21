@@ -31,7 +31,9 @@ function TaskFilter({ filterText, setFilterText, filterPeriod, filterDate }) {
         <Dropdown.Toggle variant="success" id="dropdown-basic">
           Period
         </Dropdown.Toggle>
-        <Dropdown.Menu><Dropdown.Item onClick={() => filterPeriod("weekly")}>Weekly</Dropdown.Item>
+        <Dropdown.Menu>
+          <Dropdown.Item onClick={() => filterPeriod("daily")}>Daily</Dropdown.Item>
+          <Dropdown.Item onClick={() => filterPeriod("weekly")}>Weekly</Dropdown.Item>
           <Dropdown.Item onClick={() => filterPeriod("monthly")}>Monthly</Dropdown.Item>
           <Dropdown.Item onClick={() => filterPeriod("yearly")}>Yearly</Dropdown.Item>
           <Dropdown.Item onClick={() => filterPeriod("all")}>All</Dropdown.Item>

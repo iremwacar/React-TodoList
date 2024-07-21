@@ -69,11 +69,15 @@
 .task-input{
   width: 98%;
   height: 100px;
- 
+ margin-bottom: 1px;
 }
+
 
 .error-message {
   font-size: 14px;
-  margin-top: 20px;
+  margin-top: 1px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  font-family: Arial, Helvetica, sans-serif;
 } 
 

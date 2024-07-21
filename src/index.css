@@ -110,7 +110,7 @@ body {
   background-color: #dfe6e9;
 }
 
-/* Checkbox stilini kaldır ve yerine stilize edilmiş tik işareti ekle */
+
 .to-do-list .custom-checkbox {
   position: relative;
   display: inline-block;
